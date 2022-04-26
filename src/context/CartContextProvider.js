@@ -5,7 +5,7 @@ const initialState = {
     selectedItems: [],
     itemsCounter: 0,
     total: 0,
-    chekout: false,
+    checkout: false,
 }
 
 const sumItems = items => {
@@ -26,7 +26,8 @@ const cartReducer = (state, action) => {
             return {
                 ...state,
                 selectedItems: [...state.selectedItems],
-                ...sumItems(state.selectedItems)
+                ...sumItems(state.selectedItems),
+                checkout: false,
             }
 
         }
@@ -59,17 +60,19 @@ const cartReducer = (state, action) => {
 
         case "CHECKOUT": {
             return {
-                ...state,
-                chekout: true,
+                selectedItems: [],
+                itemsCounter: 0,
+                total: 0,
+                checkout: true,
             }
         }
 
         case "CLEAR": {
             return {
                 selectedItems: [],
-                itemsCouter: 0,
+                itemsCounter: 0,
                 total: 0,
-                chekout: false,
+                checkout: false
             }
         }
         default: {
